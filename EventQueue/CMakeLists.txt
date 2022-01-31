@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall -Werror")
 
-add_executable(app main.cpp "Logger.h" "Logger.cpp" "Thread.h" "Thread.cpp" "ThreadPool.h" "ThreadPool.cpp" "Task.h")
+add_executable(app main.cpp "Logger.h" "Logger.cpp" "Thread.h" "Thread.cpp" "TasksQueue.h" "TasksQueue.cpp" "Task.h")
 

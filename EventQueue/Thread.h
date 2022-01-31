@@ -3,11 +3,11 @@
 #include <mutex>
 #include <atomic>
 
-class ThreadPool;
+class TasksQueue;
 
 class Thread
 {
-	ThreadPool* pool;
+	TasksQueue* queue;
 
 	std::atomic<bool> idle{ true };
 
@@ -16,7 +16,7 @@ class Thread
 	std::mutex m;
 
 public:
-	explicit Thread(ThreadPool* pool);
+	explicit Thread(TasksQueue* queue);
 
 	/*!
 	 * \brief Trigger thread to wake up and fetch tasks from the thread pool

@@ -10,7 +10,7 @@
 
 class Thread;
 
-class ThreadPool
+class TasksQueue
 {
 	std::vector< std::shared_ptr< Thread > > threads;
 
@@ -25,9 +25,9 @@ public:
 	 * \brief Creates a thread pool with no of threads passed
 	 *        as an argument
 	 */
-	explicit ThreadPool( std::uint16_t noOfThreads );
+	explicit TasksQueue( std::uint16_t noOfThreads );
 
-	~ThreadPool();
+	~TasksQueue();
 
 	/*!
 	 * \brief Queues task to be executed, wakes up idle threads (if available)

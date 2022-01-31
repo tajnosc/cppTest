@@ -1,6 +1,6 @@
 #include "Logger.h"
 #include "Task.h"
-#include "ThreadPool.h"
+#include "TasksQueue.h"
 
 int main()
 {
@@ -15,7 +15,7 @@ int main()
 	
 	constexpr std::uint16_t noOfThreads{ 4 };
 
-	ThreadPool pool{ noOfThreads };
+	TasksQueue queue{ noOfThreads };
 
-	pool.Queue(eventTask);
+	queue.Queue(eventTask);
 }

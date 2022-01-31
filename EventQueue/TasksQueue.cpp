@@ -1,7 +1,7 @@
-#include "ThreadPool.h"
+#include "TasksQueue.h"
 #include "Thread.h"
 
-ThreadPool::ThreadPool(std::uint16_t noOfThreads)
+TasksQueue::TasksQueue(std::uint16_t noOfThreads)
 {
 	for (int i = 0; i < noOfThreads; ++i)
 	{
@@ -9,7 +9,7 @@ ThreadPool::ThreadPool(std::uint16_t noOfThreads)
 	}
 }
 
-ThreadPool::~ThreadPool()
+TasksQueue::~TasksQueue()
 {
 	shutdown = true;
 
@@ -21,7 +21,7 @@ ThreadPool::~ThreadPool()
 	}
 }
 
-void ThreadPool::Queue(Task anything)
+void TasksQueue::Queue(Task anything)
 {
 	std::unique_lock lock{ mutex };
 
@@ -29,7 +29,7 @@ void ThreadPool::Queue(Task anything)
 	WakeUpIdleThread();
 }
 
-void ThreadPool::WakeUpIdleThread()
+void TasksQueue::WakeUpIdleThread()
 {
 	for (auto& thread : threads)
 	{
@@ -41,7 +41,7 @@ void ThreadPool::WakeUpIdleThread()
 	}
 }
 
-std::optional< std::function<void()> > ThreadPool::GetTask()
+std::optional< Task > TasksQueue::GetTask()
 {
 	std::unique_lock lock{ mutex };
 

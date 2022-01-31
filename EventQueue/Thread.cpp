@@ -1,23 +1,23 @@
 #include "Thread.h"
-#include "ThreadPool.h"
+#include "TasksQueue.h"
 #include "Task.h"
 
 #include <optional>
 #include <functional>
 
-Thread::Thread(ThreadPool* pool) :
-	pool{ pool } 
+Thread::Thread(TasksQueue* queue) :
+	queue{ queue } 
 {
 }
 
 void Thread::ProcessTasks()
 {
-	std::optional< Task > task{ pool->GetTask() };
+	std::optional< Task > task{ queue->GetTask() };
 
 	while (task.has_value())
 	{
 		task.value()();
-		task = pool->GetTask();
+		task = queue->GetTask();
 	}
 
 	idle = true;
